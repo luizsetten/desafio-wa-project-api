@@ -11,7 +11,7 @@ export class Order extends Model implements IOrder {
   @ApiProperty({ type: 'integer' })
   public quantity: number;
   @ApiProperty({ type: 'float' })
-  public value: string;
+  public value: number;
   @ApiProperty({ type: 'string', format: 'date-time' })
   public createdDate: Date;
   @ApiProperty({ type: 'string', format: 'date-time' })
@@ -19,10 +19,6 @@ export class Order extends Model implements IOrder {
 
   public static get tableName(): string {
     return 'Order';
-  }
-
-  public static get virtualAttributes(): string[] {
-    return ['fullName'];
   }
 
   public $beforeInsert(): void {
@@ -43,9 +39,4 @@ export class Order extends Model implements IOrder {
     json.roles = json.roles ? json.roles.split(',') : [];
     return Model.prototype.$formatDatabaseJson.call(this, json);
   }
-
-  // public $formatJson(data: IUser): IUser {
-  //   delete data.password;
-  //   return data;
-  // }
 }
