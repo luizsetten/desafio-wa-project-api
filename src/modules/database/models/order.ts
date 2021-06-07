@@ -28,15 +28,4 @@ export class Order extends Model implements IOrder {
   public $beforeUpdate(): void {
     this.updatedDate = new Date();
   }
-
-  public $formatDatabaseJson(json: any): any {
-    json = Model.prototype.$formatDatabaseJson.call(this, json);
-    json.roles = json.roles && json.roles.length ? json.roles.join(',') : null;
-    return json;
-  }
-
-  public $parseDatabaseJson(json: any): any {
-    json.roles = json.roles ? json.roles.split(',') : [];
-    return Model.prototype.$formatDatabaseJson.call(this, json);
-  }
 }
