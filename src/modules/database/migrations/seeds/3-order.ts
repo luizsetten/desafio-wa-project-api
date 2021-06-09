@@ -14,7 +14,7 @@ export async function seed(knex: Knex): Promise<any> {
     for (let i = 0; i < 5; i++) {
       const order: IOrder = {
         id: i,
-        description: String(i),
+        description: `Description of order ${i}`,
         value: Number(faker.commerce.price()),
         createdDate: new Date(),
         updatedDate: new Date(),

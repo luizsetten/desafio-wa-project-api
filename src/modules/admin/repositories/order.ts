@@ -15,6 +15,12 @@ export class OrderRepository {
       query = query.orderBy(params.orderBy, params.orderDirection);
     }
 
+    if (params.term) {
+      query = query.where(query => {
+        return query.where('description', 'ilike', `%${params.term}%`);
+      });
+    }
+
     return query;
   }
 
