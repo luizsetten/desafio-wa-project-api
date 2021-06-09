@@ -7,9 +7,13 @@ import { Page, Transaction } from 'objection';
 @Injectable()
 export class OrderRepository {
   public async list(params: IPaginationParams, transaction?: Transaction): Promise<Page<Order>> {
-    const query = Order.query(transaction)
+    let query = Order.query(transaction)
       .select('*')
       .page(params.page, params.pageSize);
+
+    if (params.orderBy) {
+      query = query.orderBy(params.orderBy, params.orderDirection);
+    }
 
     return query;
   }
